@@ -10,6 +10,7 @@ import { getContacts } from "../../redux/selectors";
 export const Filter = () => {
   
   const filter = useSelector(getContactFilter);
+ 
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
   const total = contacts.length;
