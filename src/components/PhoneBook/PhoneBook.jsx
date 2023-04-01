@@ -1,9 +1,16 @@
+
+
 import { useState } from 'react';
 import css from '../PhoneBook/PhoneBook.module.css';
-import PropTypes from 'prop-types';
 
+import { useSelector } from "react-redux";
+import { getContacts } from "../../redux/selectors";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export const PhoneBook = ({onSubmit}) => {
+export const PhoneBook = () => {
   const [ name, setName ] = useState('');
   const [ number, setNumber ] = useState('');
 
@@ -20,9 +27,21 @@ export const PhoneBook = ({onSubmit}) => {
     };
   };
 
+
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(name, number);
+    const checkName = contacts.find(
+      contact => contact.name === name
+    );
+    if (checkName) {
+      toast(`${name} is already in contacts`);
+      return;
+    }
+    dispatch(addContact(name, number));
+    toast(`Contact ${name} added successfully`);
     setName(s => s = '');
     setNumber(s => s = '');
   };
@@ -62,10 +81,4 @@ export const PhoneBook = ({onSubmit}) => {
       </form>
     </div>
   );
-}
-
-  
-
-PhoneBook.propTypes = {
-  onSubmit: PropTypes.func.isRequired
 }
