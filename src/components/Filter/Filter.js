@@ -2,16 +2,16 @@ import React from 'react';
 import css from '../Filter/Filter.module.css';
 
 import { useSelector } from "react-redux";
-import { getContactFilter } from "../../redux/selectors";
+import { selectContactFilter } from "../../redux/selectors";
 import { useDispatch } from "react-redux";
 import { setContactFilter } from "../../redux/filterSlice";
-import { getContacts } from "../../redux/selectors";
+import { selectContacts } from "../../redux/selectors";
 
 export const Filter = () => {
   
-  const filter = useSelector(getContactFilter);
+  const filter = useSelector(selectContactFilter);
  
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const total = contacts.length;
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import css from '../PhoneBook/PhoneBook.module.css';
 
 import { useSelector } from "react-redux";
-import { getContacts } from "../../redux/selectors";
+import { selectContacts } from "../../redux/selectors";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
 import { toast } from 'react-toastify';
@@ -28,7 +28,7 @@ export const PhoneBook = () => {
   };
 
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
